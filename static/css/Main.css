@@ -1,0 +1,67 @@
+/* Main.css - All dem styles */
+
+/* Hidden class - remove an element */
+.hidden {
+  display: none;
+}
+
+/* Popup div */
+.popup {
+  border: 1px solid black;
+  z-index: 10;
+  position: fixed;
+  width: 30em;
+  height: 40em;
+  top: 50%;
+  left: 50%;
+  margin-top: -20em;
+  margin-left: -15em;
+  background: lightgoldenrodyellow;
+  padding: 10px;
+}
+
+/* Holds search results */
+.resultsBox {
+  background: white;
+  width: 25em;
+  height: 30em;
+  margin: 25px;
+  border: 1px solid black;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+/* A single result */
+.resultRow {
+background: rgb(194, 189, 136);
+  width: 23em;
+  height: 40px;
+  text-overflow: ellipsis;
+  whitespace: nowrap;
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+/* The title in the result row */
+.resultRowTitle {
+  display: inline;
+}
+
+/* The small links on the right side of the result row */
+.resultRowRightLinks {
+  display: inline;
+  float: right;
+  width: 50px;
+}
+
+/* Result row year display */
+.resultRowYear {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Last clicked result row, so users know what to come back to */
+.lastClickedResultRow {
+  background-color: lightblue;
+}

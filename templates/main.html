@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<head>
+  <title>Movie Face</title>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/Xhr.js') }}">alert("Turn on javascript, asshole.");</script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/Main.js') }}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Main.css') }}">
+</head>
+<body>
+  <h1>All ISOs</h1>
+  <h3>DVD ({{ isoListDvd | count }})</h3>
+  <ul id="isoListDvd">
+    {% for iso in isoListDvd %}
+    <li><a href="#" onclick="showPopupForIso('{{ iso }}');">{{ iso }}</a></li>
+    <div id="{{ iso }}popup" class="popup hidden">
+      <span>Search to rename {{ iso }}</span>
+      <input type="button" value="Fix+Paste v" onclick="fixTitleAndPaste('{{ iso }}');">
+      <hr>
+      <input type="text" id="{{ iso }}searchString" onkeypress="searchMovieKeypress(event, '{{ iso }}');" size="63">
+      <input type="button" value="Search" onclick="searchMovie('{{ iso }}');">
+      <span id="{{ iso }}searchText" class="hidden">Searching...</span>
+      <div id="{{ iso }}resultsBox" class="resultsBox"></div>
+      <input type="button" value="Close" onclick="this.parentElement.classList.add('hidden');">
+    </div>
+    {% endfor %}
+  </ul>
+  <h3>Blu ray</h3>
+  <ul id="isoListBd">
+    {% for iso in isoListBd %}
+    <li>{{ iso }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
