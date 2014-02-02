@@ -1,5 +1,4 @@
 # Movie Face
-====
 
 A simple web-based UI to rename and organize large collections of movie files.
 
