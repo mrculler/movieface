@@ -1,0 +1,13 @@
+#!/bin/bash
+# Make the DB
+
+set -x
+
+db_name="face.db"
+
+sqlite="sqlite3 -noheader -bail -batch -init "
+
+$sqlite schema.sql $db_name ''
+$sqlite data.sql $db_name ''
+$sqlite inserts.sql $db_name ''
+
