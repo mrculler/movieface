@@ -34,4 +34,4 @@ class FaceDB:
     cursor.commit()
 
   def __init__(self, db_path):
-    self.__db = sqlite3.connect(db_path)
+    self.__db = sqlite3.connect(db_path, check_same_thread=False)

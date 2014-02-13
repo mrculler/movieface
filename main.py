@@ -13,10 +13,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-  bdIsos = sorted(os.listdir("movies/iso/hd"))
-  dvdIsos = sorted(os.listdir("movies/iso/sd"))
-
-  return render_template("main.html", isoListDvd=dvdIsos, isoListBd=bdIsos)
+  # Update big_dict
+  big_dict = dict.fromkeys(all_colls)
+  for coll in all_colls:
+    big_dict[coll] = db.get_all_movies_in_collection(coll)
+  return render_template("main.html", iso_dict=big_dict)
 
 @app.route("/search")
 def searchmovie():
@@ -95,9 +96,9 @@ if __name__ == "__main__":
   tmdbApiKey = apiKeyFile.read().strip()
   tmdb.API_KEY = tmdbApiKey
 
-  # Init
+  # Init big data structure from db
   db = FaceDB("sql/face.db")
-
+  all_colls = db.get_all_collections()
   
   # We set iptables to redirect port 80 requests to port 5000, so the default port is ok here
   app.run(host="0.0.0.0", debug=True)

@@ -77,9 +77,9 @@ function searchMovie(isoName) {
 }
 
 // Replace underscores with spaces and drop any extension after '.'
-function fixTitleAndPaste(isoName) {
-  var fixedIso = isoName.substr(0, isoName.lastIndexOf('.')).replace(/_/g, ' ');
-  document.getElementById(isoName + "searchString").value = fixedIso;
+function fixTitleAndPaste(movieId, filename) {
+  var fixedname = filename.substr(0, filename.lastIndexOf('.')).replace(/_/g, ' ');
+  document.getElementById(movieId + "searchString").value = fixedname;
 }
 
 function getImdb(id) {
@@ -94,8 +94,8 @@ function getImdb(id) {
 }
 
 // Show the popup and do some other stuff
-function showPopupForIso(isoName) {
-  document.getElementById(isoName + 'popup').classList.remove('hidden');
-  fixTitleAndPaste(isoName);
-  searchMovie(isoName);
+function showPopupForIso(movieId, filename) {
+  document.getElementById(movieId + 'popup').classList.remove('hidden');
+  fixTitleAndPaste(movieId, filename);
+  searchMovie(movieId);
 }

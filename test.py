@@ -13,4 +13,5 @@ for coll in all_colls:
 for i in big_dict.iterkeys():
   print i
   print len(big_dict[i])
-
+  for movie in big_dict[i]:
+    print movie.filename
