@@ -3,7 +3,11 @@
 function renameIso(isoName, newName) {
   isoName = encodeURIComponent(isoName);
   newName = encodeURIComponent(newName);
-  xhrGet("rename?type=dvd&iso=" + isoName + "&newname=" + newName, function() { 
+  xhrGet("rename", {
+    type: dvd,
+    iso: isoName,
+    newname: newName
+  }, function() { 
     alert("successfully renamed!");
     location.reload();
   });
@@ -63,8 +67,7 @@ function searchMovie(isoName) {
   };
 
   var searchString = document.getElementById(isoName + "searchString").value;
-  searchString = encodeURIComponent(searchString);
-  xhrGet("search?searchwords=" + searchString, function(resultObj) {
+  xhrGet("search", {searchwords: searchString}, function(resultObj) {
     var resultString;
     var resultsBox = document.getElementById(isoName + "resultsBox");
     resultsBox.innerHTML = ""; // remove existing results
@@ -83,7 +86,7 @@ function fixTitleAndPaste(movieId, filename) {
 }
 
 function getImdb(id) {
-  xhrGet("imdbLink?mid=" + id, function(imdbIdObj) {
+  xhrGet("imdbLink", {mid: id}, function(imdbIdObj) {
     if (imdbIdObj && imdbIdObj.hasOwnProperty("imdbid")) {
       window.open("http://imdb.com/title/" + imdbIdObj.imdbid, "_blank").focus();
     }
