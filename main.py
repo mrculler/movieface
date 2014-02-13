@@ -1,8 +1,9 @@
 from flask import Flask, request, render_template
 import os
-import json
-import easytmdb as tmdb
 import re
+import json
+import urllib
+import easytmdb as tmdb
 from pprint import pprint
 
 from face_types import Collection, Movie
@@ -23,19 +24,26 @@ def hello():
 def searchmovie():
   searchString = request.args.get("searchwords")
   print "searching for: " + searchString
-  searchResults = tmdb.Search().movies({"query": searchString})
+  searchResultsObj = tmdb.Search().movies(urllib.quote(searchString))
+
+  #if searchResultsObj["total_results"] == 0:
+  #  return json.dumps({"results": ""})
+
+  print "total: " + str(searchResultsObj["total_results"])
+
+  # Depaginate
+  #searchResults = []
+  #for page in searchResultsObj["results"]:
+  #  searchResults.append(page)
+  searchResults = searchResultsObj["results"]
   
   searchResultsSerializable = []
-  for movie in searchResults["results"]:
+  for movie in searchResults:
     print "  found: " + movie["title"]
     thisMovie = {}
     thisMovie["title"] = movie["title"]
     thisMovie["year"] = movie["release_date"][:4]
     thisMovie["id"] = movie["id"]
-    """
-    movieObj = tmdb.Movie(movie["id"])
-    thisMovie["imdbId"] = movieObj.get_imdb_id()
-    """
     searchResultsSerializable.append(thisMovie)
   return json.dumps({"results": searchResultsSerializable})
 
